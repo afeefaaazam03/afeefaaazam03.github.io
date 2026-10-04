@@ -102,7 +102,10 @@ img { max-width: 100%; }
 .snap-head { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
 .snap-main { display: block; margin-top: 8px; font: 600 18.5px/1.4 var(--f-display); }
 .snap-main em { font-style: normal; color: var(--accent); }
-.snap-sub { display: block; margin-top: 6px; font-size: 15px; color: var(--muted); max-width: 64ch; }
+.snap-sub strong { color: var(--ink); font-weight: 600; }
+.snap-sub a { font-weight: 600; text-decoration: none; }
+.snap-sub a:hover { text-decoration: underline; }
+.snap-sub { display: block; margin-top: 8px; font-size: 15px; color: var(--muted); max-width: 64ch; }
 .topic-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .tag { display: inline-flex; padding: 4px 11px; border-radius: 999px; font-size: 12.5px; font-weight: 600; border: 1px solid transparent; }
 .tg-blue { background: var(--tg-blue-bg); color: var(--tg-blue); border-color: color-mix(in srgb, var(--tg-blue) 22%, transparent); }
@@ -249,12 +252,15 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
         <span class="snap-head">Research snapshot</span>
         <span class="snap-main">My work asks: can a phone or drone camera <em>count, segment, and grade every fruit</em> in a dense greenhouse canopy?</span>
         <span class="snap-sub">I build ripeness datasets for blueberries and tomatoes, lightweight segmentation for crowded berries, and vision-language models that adapt to new greenhouses with few labels.</span>
+        <span class="snap-sub">For aerospace inspection, I work on <strong>jet engine blades in 3D</strong>: placing suspected damage on the blade's 3D mesh and estimating how its shape has changed, so that controlled 3D damage can teach better inspection of real photographs. <a href="https://afeefaaazam03.github.io/MyPortfolio/main-jet/">See the Main Jet demo →</a></span>
         <div class="topic-row">
           <span class="tag tg-blue">Vision-Language Models</span>
           <span class="tag tg-green">Precision Agriculture</span>
           <span class="tag tg-violet">Dense Segmentation</span>
           <span class="tag tg-amber">Fruit Counting</span>
           <span class="tag tg-rose">Ripeness Estimation</span>
+          <span class="tag tg-blue">3D Damage Localization</span>
+          <span class="tag tg-violet">Shape Estimation</span>
           <span class="tag tg-cyan">Medical Imaging</span>
         </div>
       </div>
@@ -270,13 +276,6 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
       </div>
     </div>
   </section>
-
-  <div class="ramp" aria-label="Ripeness stages annotated in the AerialYield datasets">
-    <span class="bar"><i style="background:var(--r1)"></i><i style="background:var(--r2)"></i><i style="background:var(--r3)"></i><i style="background:var(--r4)"></i><i style="background:var(--r5)"></i></span>
-    <span>blueberry · 5 ripeness stages</span>
-    <span class="bar"><i style="background:var(--t1)"></i><i style="background:var(--t2)"></i><i style="background:var(--t3)"></i><i style="background:var(--t4)"></i><i style="background:var(--t5)"></i><i style="background:var(--t6)"></i></span>
-    <span>tomato · 6 ripeness stages</span>
-  </div>
 
   <section class="section" id="publications">
     <div class="section-head"><h2>📚 Publications</h2><p>Datasets, benchmarks, and methods for seeing fruit in greenhouses, plus earlier work on industrial inspection.</p></div>
@@ -438,7 +437,7 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
     <div class="projects">
       <article class="project"><a class="project-media" href="images/blueberry-benchmark.png"><img src="images/blueberry-benchmark.png" alt="Unified blueberry model diagram" style="object-position: 0 50%" loading="lazy"></a><div class="project-body"><h3>Aerial Yield</h3><p>Benchmarking deep models for fruit counting and ripeness, plus a dashboard for exploring predictions, crop analytics, and yield estimates.</p><div class="stack"><span class="tag tg-blue">PyTorch</span><span class="tag tg-green">YOLO</span><span class="tag tg-violet">FastAPI</span></div></div></article>
       <article class="project"><a class="project-media" href="images/aircraft-defect.png"><img src="images/aircraft-defect.png" alt="YOLOv8 detection of a dent on an aircraft nose" style="object-position: 50% 45%" loading="lazy"></a><div class="project-body"><h3>Aircraft Defect Detection</h3><p>YOLOv8 pipeline for aircraft surface defects with preprocessing, augmentation, and evaluation. Undergraduate major project.</p><div class="stack"><span class="tag tg-green">YOLOv8</span><span class="tag tg-violet">FastAPI</span></div></div></article>
-      <article class="project"><div class="project-media tile th-aero">Jet Engine Blade Damage</div><div class="project-body"><h3>Jet Engine Blade Damage Detection</h3><p>Localizes and classifies small blade surface anomalies, with a synthetic data generator that links blade images to 3D geometry.</p><div class="stack"><span class="tag tg-cyan">OpenCV</span><span class="tag tg-blue">PyTorch</span><span class="tag tg-amber">3D</span></div></div></article>
+      <article class="project"><a class="project-media tile th-aero" href="https://afeefaaazam03.github.io/MyPortfolio/main-jet/" style="text-decoration:none">Main Jet<br>3D Blade Inspection</a><div class="project-body"><h3><a href="https://afeefaaazam03.github.io/MyPortfolio/main-jet/" style="color:inherit;text-decoration:none">Main Jet: Jet Engine Blade Inspection</a></h3><p>Locates suspected damage on a blade's 3D mesh and estimates the changed shape from images, using synthetic 3D damage to improve inspection of real photographs. <a href="https://afeefaaazam03.github.io/MyPortfolio/main-jet/">Live demo</a></p><div class="stack"><span class="tag tg-cyan">OpenCV</span><span class="tag tg-blue">PyTorch</span><span class="tag tg-amber">3D</span></div></div></article>
       <article class="project"><div class="project-media tile th-leaf">GreenVLM</div><div class="project-body"><h3>GreenVLM</h3><p>CLIP-based tomato ripeness classification with limited labels, using domain adaptation across greenhouses.</p><div class="stack"><span class="tag tg-blue">CLIP</span><span class="tag tg-amber">Hugging Face</span></div></div></article>
       <article class="project"><div class="project-media tile th-rose">CervixGuard</div><div class="project-body"><h3>CervixGuard</h3><p>Combines an image classifier with report parsing to compare pathology reports against biopsy slides and flag omissions or contradictions.</p><div class="stack"><span class="tag tg-rose">Medical Imaging</span><span class="tag tg-violet">NLP</span></div></div></article>
       <article class="project"><div class="project-media tile th-berry">Course Syllabus Assistant</div><div class="project-body"><h3>Course Syllabus Assistant</h3><p>Chatbot that answers course questions and navigates the syllabus through a Gradio interface.</p><div class="stack"><span class="tag tg-green">ChatGPT</span><span class="tag tg-amber">Gradio</span></div></div></article>
