@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Afeefa Azam</title>
+<meta name="description" content="Afeefa Azam is a Research Assistant at Khalifa University working on computer vision for precision agriculture: fruit counting, ripeness assessment, and yield estimation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 1040px column. Sticky nav, then a two-part hero (portrait + identity),
+   then sections with a narrow left label rail and content on the right. */
+:root {
+  --bg: #f6f8f5;          /* leaf-tinted paper */
+  --surface: #ffffff;
+  --ink: #17201b;
+  --muted: #5b6760;
+  --line: #dde3dd;
+  --accent: #3d3f9c;      /* ripe blueberry */
+  --accent-soft: #e7e8f6;
+  --leaf: #3f7d4e;        /* unripe green */
+  --tomato: #c8452f;
+  /* ripeness ramp, green → ripe */
+  --r1: #8fbf6a; --r2: #d9d27a; --r3: #d6879a; --r4: #8b5aa8; --r5: #343a8c;
+  --t1: #7fb069; --t2: #c6cf6d; --t3: #e8b14e; --t4: #e6823f; --t5: #d4553a; --t6: #a8312a;
+
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111613; --surface: #18201b; --ink: #e8eee9; --muted: #9aa8a0; --line: #2a352e;
+    --accent: #a5a8f2; --accent-soft: #252848; --leaf: #7fc28f; --tomato: #f0846f;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111613; --surface: #18201b; --ink: #e8eee9; --muted: #9aa8a0; --line: #2a352e;
+  --accent: #a5a8f2; --accent-soft: #252848; --leaf: #7fc28f; --tomato: #f0846f;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 16px/1.65 var(--f-body);
+  padding-inline: 20px;
+}
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+
+/* nav */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  margin-inline: -20px; padding-inline: 20px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; align-items: center; gap: 24px; height: 60px; }
+.brand { font-family: var(--f-display); font-weight: 700; font-size: 18px; color: var(--ink); text-decoration: none; margin-right: auto; display: flex; align-items: center; gap: 10px; }
+.brand .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 5px -4px 0 -3px var(--leaf); }
+.nav nav { display: flex; gap: 20px; }
+.nav nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+.nav nav a:hover { color: var(--ink); }
+.theme-btn { background: none; border: 1px solid var(--line); color: var(--ink); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: grid; place-items: center; }
+.theme-btn svg { width: 16px; height: 16px; }
+@media (max-width: 760px) { .nav nav { display: none; } }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 240px 1fr; gap: 48px; padding-block: 64px 48px; align-items: start; }
+.portrait { display: flex; flex-direction: column; gap: 18px; align-items: center; }
+.avatar { width: 200px; height: 200px; border-radius: 50%; overflow: hidden; position: relative; background: var(--accent-soft); display: grid; place-items: center; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.avatar span { font-family: var(--f-display); font-size: 64px; font-weight: 700; color: var(--accent); }
+.socials { display: flex; gap: 10px; }
+.socials a { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; color: var(--ink); background: var(--surface); }
+.socials a:hover { border-color: var(--accent); color: var(--accent); }
+.socials svg { width: 18px; height: 18px; fill: currentColor; }
+.eyebrow { font: 500 12px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--leaf); }
+.hero h1 { font-size: clamp(40px, 6vw, 60px); letter-spacing: -0.02em; margin-block: 12px 8px; }
+.role { font-size: 19px; color: var(--ink); margin: 0; }
+.role small { display: block; color: var(--muted); font-size: 15px; margin-top: 2px; }
+.bio { max-width: 62ch; margin-block: 20px; color: var(--ink); }
+.bio p { margin: 0 0 12px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.tags li { font: 500 12.5px/1 var(--f-mono); padding: 7px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: 14.5px; text-decoration: none; border: 1px solid var(--line); color: var(--ink); background: var(--surface); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.btn:hover { border-color: var(--accent); }
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; gap: 28px; padding-block: 40px 32px; }
+  .portrait { align-items: flex-start; }
+  .avatar { width: 140px; height: 140px; } .avatar span { font-size: 46px; }
+}
+
+/* ripeness ramp under hero */
+.ramp { display: flex; align-items: center; gap: 14px; font: 400 12px/1.3 var(--f-mono); color: var(--muted); padding-bottom: 8px; flex-wrap: wrap; }
+.ramp .bar { display: flex; gap: 4px; }
+.ramp .bar i { width: 16px; height: 16px; border-radius: 50%; }
+
+/* sections */
+section.block { display: grid; grid-template-columns: 200px 1fr; gap: 40px; padding-block: 48px; border-top: 1px solid var(--line); }
+.block > header h2 { font-size: 26px; letter-spacing: -0.01em; }
+.block > header p { color: var(--muted); font-size: 14px; margin: 8px 0 0; }
+@media (max-width: 760px) { section.block { grid-template-columns: 1fr; gap: 20px; padding-block: 36px; } }
+
+/* publications */
+.pubs { display: grid; gap: 18px; }
+.pub { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.thumb { aspect-ratio: 4 / 3; max-width: 100%; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; color: #fff; font: 500 11px/1.2 var(--f-mono); letter-spacing: .04em; overflow: hidden; position: relative; }
+.thumb b { font: 700 20px/1 var(--f-display); letter-spacing: -0.01em; }
+.thumb .sw { display: flex; gap: 3px; }
+.thumb .sw i { flex: 1; height: 8px; border-radius: 2px; }
+.th-berry { background: linear-gradient(150deg, #2e3277, #4a4fae); }
+.th-tomato { background: linear-gradient(150deg, #7a2a1f, #c8452f); }
+.th-flare { background: linear-gradient(150deg, #3b2a1a, #b9622a); }
+.th-aero { background: linear-gradient(150deg, #1f3440, #3f6a7d); }
+.th-leaf { background: linear-gradient(150deg, #1f4a2c, #3f7d4e); }
+.thumb-img { display: block; aspect-ratio: 4 / 3; max-width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--bg); }
+.thumb-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.project-img { display: block; margin: -18px -18px 6px; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius) var(--radius) 0 0; border-bottom: 1px solid var(--line); }
+.project-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pub h3 { font-size: 17.5px; font-weight: 600; line-height: 1.3; }
+.authors { font-size: 14px; color: var(--muted); margin: 6px 0 0; }
+.authors strong { color: var(--ink); font-weight: 600; }
+.venue { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; font-size: 13.5px; }
+.status { font: 500 11px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 5px 8px; border-radius: 4px; border: 1px solid currentColor; }
+.s-acc { color: var(--leaf); } .s-sub { color: var(--accent); } .s-prep { color: var(--muted); } .s-pub { color: var(--tomato); }
+.links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.links a { font: 500 12.5px/1 var(--f-mono); padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; text-decoration: none; color: var(--ink); }
+.links a:hover { border-color: var(--accent); color: var(--accent); }
+@media (max-width: 560px) { .pub { grid-template-columns: 1fr; } .thumb, .thumb-img { aspect-ratio: 16 / 7; } }
+
+/* timeline */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; }
+.timeline li { display: grid; grid-template-columns: 48px 1fr; gap: 18px; }
+.logo { width: 48px; height: 48px; border-radius: 10px; display: grid; place-items: center; font: 700 15px/1 var(--f-display); color: #fff; }
+.lg-ku { background: #1d3f73; } .lg-nyu { background: #57068c; } .lg-cfi { background: #d9792b; } .lg-st { background: #3f7d4e; }
+.tl-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; align-items: baseline; }
+.tl-head h3 { font-size: 18px; font-weight: 600; }
+.when { font: 400 13px/1.4 var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.tl-sub { color: var(--muted); font-size: 14.5px; margin: 2px 0 8px; }
+.timeline ul { margin: 0; padding-left: 18px; font-size: 15px; }
+.timeline ul li { display: list-item; margin-bottom: 4px; }
+
+/* projects */
+.projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.project { padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); display: flex; flex-direction: column; gap: 8px; }
+.project h3 { font-size: 16.5px; font-weight: 600; }
+.project p { margin: 0; font-size: 14.5px; color: var(--muted); }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+.stack span { font: 400 11.5px/1 var(--f-mono); padding: 5px 7px; border-radius: 4px; background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+
+/* skills / misc */
+.kv { display: grid; grid-template-columns: 170px 1fr; gap: 10px 20px; margin: 0; }
+.kv dt { font: 500 12px/1.9 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.kv dd { margin: 0; }
+@media (max-width: 560px) { .kv { grid-template-columns: 1fr; gap: 2px; } .kv dd { margin-bottom: 12px; } }
+.plain { margin: 0; padding-left: 18px; }
+.plain li { margin-bottom: 6px; }
+
+/* contact */
+.contact { padding-block: 56px 40px; border-top: 1px solid var(--line); }
+.contact h2 { font-size: clamp(30px, 4.5vw, 42px); letter-spacing: -0.02em; }
+.contact p { color: var(--muted); max-width: 56ch; }
+.email-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 18px; }
+.email { font: 500 17px/1 var(--f-mono); padding: 12px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; color: var(--ink); }
+#copy-email { cursor: pointer; font: inherit; }
+footer { padding-block: 24px 40px; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; border-top: 1px solid var(--line); }
+</style>
+
+<div class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>Afeefa Azam</a>
+    <nav aria-label="Sections">
+      <a href="#publications">Publications</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</div>
+
+<main class="wrap" id="top">
+  <section class="hero">
+    <div class="portrait">
+      <div class="avatar">
+        <span aria-hidden="true">AA</span>
+        <!-- Put your photo next to this file as me.jpg -->
+        <img src="me.jpg" alt="Portrait of Afeefa Azam" onerror="this.remove()">
+      </div>
+      <div class="socials">
+        <a href="mailto:afeefa.aazam@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4 7.4V17h16V7.4l-8 4.8zM5.2 7 12 11l6.8-4H5.2z"/></svg></a>
+        <!-- TODO: replace # with your real profile URLs -->
+        <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg></a>
+        <a href="https://www.linkedin.com/in/afeefa-azam-68209924a/" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3V9.5zm7 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4V9.5z"/></svg></a>
+        <a href="#" aria-label="Google Scholar"><svg viewBox="0 0 24 24"><path d="M12 3 1 10l4 2.5V17l7 4 7-4v-4.5l2-1.3V17h2v-7L12 3zm0 2.4L19.2 10 12 14.6 4.8 10 12 5.4z"/></svg></a>
+      </div>
+    </div>
+
+    <div>
+      <div class="eyebrow">Computer vision · Precision agriculture</div>
+      <h1>Afeefa Azam</h1>
+      <p class="role">Research Assistant, Khalifa University
+        <small>Abu Dhabi, UAE · with Prof. Yusra Abdulrahman and Prof. Irfan Hussain</small></p>
+      <div class="bio">
+        <p>I build vision systems that count, segment, and grade fruit in greenhouses from aerial and ground footage. My recent work covers blueberry and tomato datasets with stage-by-stage ripeness masks, lightweight segmentation for dense canopies, and benchmarks that weigh accuracy against what a model costs to run.</p>
+        <p>I'm also interested in vision-language models: adapting CLIP to greenhouse imagery with few labels, and more broadly in multimodal models for medical and scientific images.</p>
+      </div>
+      <ul class="tags">
+        <li>Multimodal foundation models</li>
+        <li>Vision-language models</li>
+        <li>Dense segmentation &amp; counting</li>
+        <li>Ripeness estimation</li>
+        <li>Medical imaging</li>
+      </ul>
+      <div class="ctas">
+        <a class="btn primary" href="#publications">View my work</a>
+        <a class="btn" href="CV_Afeefa.pdf">Download CV</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ramp" aria-label="Ripeness stages used in the AerialYield datasets">
+    <span class="bar" title="Blueberry, 5 stages"><i style="background:var(--r1)"></i><i style="background:var(--r2)"></i><i style="background:var(--r3)"></i><i style="background:var(--r4)"></i><i style="background:var(--r5)"></i></span>
+    <span>blueberry · 5 ripeness stages</span>
+    <span class="bar" title="Tomato, 6 stages"><i style="background:var(--t1)"></i><i style="background:var(--t2)"></i><i style="background:var(--t3)"></i><i style="background:var(--t4)"></i><i style="background:var(--t5)"></i><i style="background:var(--t6)"></i></span>
+    <span>tomato · 6 ripeness stages</span>
+  </div>
+
+  <section class="block" id="publications">
+    <header><h2>Publications</h2><p>Papers, datasets, and manuscripts in progress.</p></header>
+    <div class="pubs">
+
+      <article class="pub">
+        <a class="thumb-img" href="images/aerialyield-b2d.png"><img src="images/aerialyield-b2d.png" alt="Sample AerialYield-B2D images: smartphone close-ups and DJI drone frames of greenhouse blueberries" style="object-position: 0 15%" loading="lazy"></a>
+        <div>
+          <h3>AerialYield-B2D: A Greenhouse Blueberry Dataset with Five-Stage Ripeness Masks and Fruit Counts</h3>
+          <p class="authors">I. I. Ganapathi, <strong>A. Azam</strong>, M. Owais, I. Hussain, Y. Abdulrahman</p>
+          <div class="venue"><span class="status s-sub">Submitted</span><span>Scientific Data · arXiv preprint, 2026</span></div>
+          <div class="links"><a href="https://arxiv.org/abs/2608.16973">arXiv</a><a href="https://arxiv.org/pdf/2608.16973">PDF</a><a href="https://github.com/iyyakuttiiyappan/Blueberry-Ripeness-Dataset">Code &amp; data</a></div>
+        </div>
+      </article>
+
+      <article class="pub">
+        <a class="thumb-img" href="images/flare-analytics.png"><img src="images/flare-analytics.png" alt="Vision-Based Flare Analytics app showing a thermal flare frame with predicted combustion efficiency 98.63% and an efficiency-over-time chart" loading="lazy"></a>
+        <div>
+          <h3>AI-Powered Flare Combustion Efficiency Estimation</h3>
+          <p class="authors"><strong>A. Azam</strong>, I. I. Ganapathi, F. O. Abdelhafez, D. Velayudhan, M. A. Habtie, H. Karki, K. Y. Al Awadhi, N. Werghi</p>
+          <div class="venue"><span class="status s-acc">Accepted</span><span>ICMLDE 2025 · arXiv preprint, 2026</span></div>
+          <div class="links"><a href="https://arxiv.org/abs/2609.11262">arXiv</a><a href="https://arxiv.org/pdf/2609.11262">PDF</a></div>
+        </div>
+      </article>
+
+      <article class="pub">
+        <div class="thumb th-berry"><span>SEGMENTATION</span><b>Detect + Watershed</b><span>real-time · dense canopy</span></div>
+        <div>
+          <h3>Real-Time Berry Segmentation in Dense Canopies: A Lightweight Detection-Watershed Approach</h3>
+          <p class="authors"><strong>A. Azam</strong> et al.</p>
+          <div class="venue"><span class="status s-sub">Submitted</span><span>Manuscript under review</span></div>
+        </div>
+      </article>
+
+      <article class="pub">
+        <a class="thumb-img" href="images/aerialyield-t2m.png"><img src="images/aerialyield-t2m.png" alt="AerialYield-T2M figure: six tomato ripeness classes with RGB crops, selective masks, annotation overlays and class shares" style="object-position: 10% 20%" loading="lazy"></a>
+        <div>
+          <h3>AerialYield-T2M: A Dual-Modality Greenhouse Tomato Dataset with Six-Stage Ripeness Masks and Fruit Counts</h3>
+          <p class="authors"><strong>A. Azam</strong> et al.</p>
+          <div class="venue"><span class="status s-prep">In preparation</span><span>For Scientific Data</span></div>
+        </div>
+      </article>
+
+      <article class="pub">
+        <div class="thumb th-leaf"><span>VISION-LANGUAGE</span><b>GreenVLM</b><span>domain-adapted CLIP</span></div>
+        <div>
+          <h3>GreenVLM: Domain-Adapted CLIP for Greenhouse Tomato Ripeness Classification</h3>
+          <p class="authors"><strong>A. Azam</strong> et al.</p>
+          <div class="venue"><span class="status s-prep">In preparation</span></div>
+        </div>
+      </article>
+
+      <article class="pub">
+        <a class="thumb-img" href="images/ripebench.png"><img src="images/ripebench.png" alt="RipeBench pipeline: robot perceives tomato ripeness R1 to R4, decides, selects targets and harvests R3 and R4 bunches" loading="lazy"></a>
+        <div>
+          <h3>RipeBench: A Multi-Stage Real-to-Synthetic Tomato Dataset for Ripeness-Aware Robotic Vision in Greenhouse Environments</h3>
+          <p class="authors"><strong>A. Azam</strong> et al.</p>
+          <div class="venue"><span class="status s-prep">In preparation</span></div>
+        </div>
+      </article>
+
+      <article class="pub">
+        <a class="thumb-img" href="images/blueberry-benchmark.png"><img src="images/blueberry-benchmark.png" alt="Unified blueberry model: shared encoder and FPN feeding counting, classification, detection and segmentation heads" style="object-position: 95% 50%" loading="lazy"></a>
+        <div>
+          <h3>A Unified Benchmark for Blueberry Detection, Segmentation, Counting, and Ripeness Classification</h3>
+          <p class="authors"><strong>A. Azam</strong> et al.</p>
+          <div class="venue"><span class="status s-prep">In preparation</span><span>Research manuscript</span></div>
+        </div>
+      </article>
+
+      <article class="pub">
+        <a class="thumb-img" href="images/berryseg-ls.png"><img src="images/berryseg-ls.png" alt="BerrySegLS qualitative ablation montage comparing patch-crop, tiny-berry augmentation and resolution settings" style="object-position: 20% 30%" loading="lazy"></a>
+        <div>
+          <h3>BerrySegLS: High-Resolution One-Stage Segmentation and Learned-Seed Watershed for Dense Blueberry Segmentation and Counting in Greenhouses</h3>
+          <p class="authors"><strong>A. Azam</strong> et al.</p>
+          <div class="venue"><span class="status s-prep">In preparation</span></div>
+        </div>
+      </article>
+
+      <article class="pub">
+        <div class="thumb th-aero"><span>REVIEW</span><b>Aerospace QA</b><span>defect detection</span></div>
+        <div>
+          <h3>Automated AI-Based Defect Detection in Aerospace Industry: A Comprehensive Review</h3>
+          <p class="authors"><strong>A. Azam</strong>, J. A. Ahmed, B. Shivani</p>
+          <div class="venue"><span class="status s-pub">Published</span><span>IRJET, 12(4), pp. 941–946, April 2025</span></div>
+          <div class="links"><a href="https://www.irjet.net/archives/V12/i4/IRJET-V12I4144.pdf">PDF</a></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="block" id="experience">
+    <header><h2>Experience</h2></header>
+    <ol class="timeline">
+      <li>
+        <div class="logo lg-ku" aria-hidden="true">KU</div>
+        <div>
+          <div class="tl-head"><h3>Research Assistant · Khalifa University</h3><span class="when">Nov 2025 – Present</span></div>
+          <p class="tl-sub">Abu Dhabi · Prof. Yusra Abdulrahman and Prof. Irfan Hussain</p>
+          <ul>
+            <li>Vision for precision agriculture from aerial and greenhouse footage: crop monitoring, fruit counting, ripeness assessment, and yield estimation.</li>
+            <li>Benchmark models on accuracy, robustness, and compute cost to guide model choice and a planned paper.</li>
+            <li>Build a web dashboard and interactive app for crop analytics, ripeness, yield estimates, and model predictions.</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="logo lg-ku" aria-hidden="true">KU</div>
+        <div>
+          <div class="tl-head"><h3>Research Intern · Khalifa University</h3><span class="when">Jul 2025 – Oct 2025</span></div>
+          <p class="tl-sub">Abu Dhabi · Prof. Naoufel Werghi</p>
+          <ul>
+            <li>Worked on AI-based flare combustion efficiency estimation; the paper was accepted at ICMLDE 2025.</li>
+            <li>Built a user interface and ML models for classroom image understanding and monitoring.</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="logo lg-nyu" aria-hidden="true">NYU</div>
+        <div>
+          <div class="tl-head"><h3>Researcher · New York University Abu Dhabi</h3><span class="when">Jan 2025 – Feb 2025</span></div>
+          <p class="tl-sub">Abu Dhabi</p>
+          <ul><li>Supported a postdoctoral researcher on quantum machine learning with Qiskit, PennyLane, PyTorch, and TensorFlow.</li></ul>
+        </div>
+      </li>
+      <li>
+        <div class="logo lg-cfi" aria-hidden="true">CFI</div>
+        <div>
+          <div class="tl-head"><h3>Python Developer Intern · Code For India Foundation</h3><span class="when">May 2024 – Jun 2024</span></div>
+          <p class="tl-sub">Hyderabad, India</p>
+          <ul><li>Wrote Python ML workflows for author identification, COVID-19 data analysis, and movie recommendation.</li></ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block" id="projects">
+    <header><h2>Projects</h2></header>
+    <div class="projects">
+      <article class="project"><h3>Aerial Yield</h3><p>Benchmarking deep models for fruit counting and ripeness assessment, plus a dashboard for exploring predictions, crop analytics, and yield estimates.</p><div class="stack"><span>PyTorch</span><span>YOLO</span><span>FastAPI</span></div></article>
+      <article class="project"><h3>Jet Engine Blade Damage Detection</h3><p>Inspection pipeline that localizes and classifies small surface anomalies, with a synthetic data generator linking blade images to 3D geometry.</p><div class="stack"><span>OpenCV</span><span>PyTorch</span><span>3D</span></div></article>
+      <article class="project"><h3>CervixGuard</h3><p>Combines an image classifier with report parsing to compare pathology reports against biopsy slides and flag omissions or contradictions.</p><div class="stack"><span>Classification</span><span>NLP</span></div></article>
+      <article class="project"><h3>GreenVLM</h3><p>CLIP-based tomato ripeness classification with limited labels, using domain adaptation across greenhouse environments.</p><div class="stack"><span>CLIP</span><span>Hugging Face</span></div></article>
+      <article class="project"><a class="project-img" href="images/aircraft-defect.png"><img src="images/aircraft-defect.png" alt="YOLOv8 detection of a dent on an aircraft nose, labeled dent 0.64 (Medium)" style="object-position: 50% 40%" loading="lazy"></a><h3>Aircraft Defect Detection</h3><p>YOLOv8 pipeline for aircraft surface defects with preprocessing, augmentation, and evaluation. Undergraduate major project.</p><div class="stack"><span>YOLOv8</span><span>FastAPI</span></div></article>
+      <article class="project"><h3>Course Syllabus Assistant</h3><p>Chatbot that answers course questions and navigates the syllabus through a Gradio interface.</p><div class="stack"><span>ChatGPT</span><span>Gradio</span></div></article>
+    </div>
+  </section>
+
+  <section class="block" id="skills">
+    <header><h2>Skills</h2></header>
+    <dl class="kv">
+      <dt>Languages</dt><dd>Python, C/C++, SQL, Java, JavaScript, CSS</dd>
+      <dt>Frameworks</dt><dd>PyTorch, TensorFlow, OpenCV, Hugging Face, YOLO, CLIP, Qiskit, PennyLane</dd>
+      <dt>Tools</dt><dd>FastAPI, Gradio, PyQt5/6, Git, Jupyter, Google Colab, Power BI, MATLAB, LaTeX</dd>
+    </dl>
+  </section>
+
+  <section class="block" id="education">
+    <header><h2>Education</h2></header>
+    <ol class="timeline">
+      <li>
+        <div class="logo lg-st" aria-hidden="true">SC</div>
+        <div>
+          <div class="tl-head"><h3>B.E. Computer Engineering</h3><span class="when">2021 – 2025</span></div>
+          <p class="tl-sub">Stanley College of Engineering and Technology for Women · Hyderabad, India · GPA 8.0/10</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block" id="awards">
+    <header><h2>Awards &amp; leadership</h2></header>
+    <ul class="plain">
+      <li>Guinness World Record achievement; technical poster and paper presentation awards.</li>
+      <li>Ideathon award, Muffakham Jah College of Engineering.</li>
+      <li>Campus Lead, Edventure Park (2023 – 2025): organized student workshops and campus events.</li>
+      <li>Training: data science with Python (NASSCOM), full-stack Python and Django, data analytics with Power BI.</li>
+    </ul>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Get in touch</h2>
+    <p>I'm happy to talk about agricultural vision, datasets, vision-language models, or research collaborations.</p>
+    <div class="email-row">
+      <span class="email">afeefa.aazam@gmail.com</span>
+      <button class="btn" id="copy-email" type="button">Copy email</button>
+      <a class="btn" href="mailto:afeefa.aazam@gmail.com">Send email</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Afeefa Azam</span>
+    <span>Abu Dhabi, UAE</span>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  try { var saved = localStorage.getItem("theme"); if (saved) root.dataset.theme = saved; } catch (e) {}
+  document.getElementById("theme-toggle").addEventListener("click", function () {
+    var dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+  });
+  var copyBtn = document.getElementById("copy-email");
+  copyBtn.addEventListener("click", function () {
+    var done = function () { copyBtn.textContent = "Copied"; setTimeout(function () { copyBtn.textContent = "Copy email"; }, 1800); };
+    if (navigator.clipboard) navigator.clipboard.writeText("afeefa.aazam@gmail.com").then(done, function () { copyBtn.textContent = "Select the address to copy"; });
+  });
+})();
+</script>
+</html>
