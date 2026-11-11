@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Afeefa Azam</title>
-<meta name="description" content="Afeefa Azam is a Research Assistant at Khalifa University working on computer vision for precision agriculture: fruit counting, ripeness assessment, and yield estimation.">
+<meta name="description" content="Afeefa Azam is a Research Assistant at Khalifa University working on computer vision for precision agriculture: fruit counting, ripeness assessment, and yield estimation. Also 3D damage estimation for jet engine blades.">
 <link rel="icon" href="images/logos/ku.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -249,8 +249,8 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
       <div class="snapshot">
         <span class="snap-head">Research snapshot</span>
         <span class="snap-main">My work asks: can a phone or drone camera <em>count, segment, and grade every fruit</em> in a dense greenhouse canopy?</span>
-        <span class="snap-sub">I build ripeness datasets for blueberries and tomatoes, lightweight segmentation for crowded berries, and vision-language models that adapt to new greenhouses with few labels.</span>
-        <span class="snap-sub">For aerospace inspection, I work on <strong>BladeDelta</strong>: turning photos of jet engine blades into a 3D map of damage that shows where each dent is and how deep it goes, tested on blades never seen during development.</span>
+        <span class="snap-sub">I build ripeness datasets for blueberries and tomatoes, lightweight segmentation for crowded berries, and vision-language models that adapt to new greenhouses with few labels. I fly the drones myself to collect the aerial footage for this work.</span>
+        <span class="snap-sub">My 3D work centres on <strong>BladeDelta</strong>, a method for jet engine blades. It takes a healthy CAD model and a few calibrated photos of a damaged blade, then places each dent in 3D with an estimated depth. When the photos cannot support a damage call, it reports "not supported" instead of guessing.</span>
         <div class="topic-row">
           <span class="tag tg-blue">Vision-Language Models</span>
           <span class="tag tg-green">Precision Agriculture</span>
@@ -278,6 +278,15 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
   <section class="section" id="publications">
     <div class="section-head"><h2>📚 Publications</h2><p>Datasets, benchmarks, and methods for seeing fruit in greenhouses, plus earlier work on industrial inspection.</p></div>
     <div class="pubs">
+
+      <article class="pub">
+        <div class="pub-media tile th-aero"><b>Intervention Drops</b><span>CVPR · Under submission</span></div>
+        <div class="pub-body">
+          <div class="pub-flags"><span class="venue v-sub">CVPR · Under submission</span><span class="tag tg-blue">Vision-Language</span><span class="tag tg-green">Precision Agriculture</span></div>
+          <h3>Intervention Drops Are Not Evidence Use: Auditing Grounded Agricultural VLMs</h3>
+          <p class="authors"><a href="https://openreview.net/profile?id=~Iyyakutti_Iyappan_Ganapathi1">Iyyakutti Iyappan Ganapathi</a>, <a href="https://openreview.net/profile?id=~Syed_Sadaf_Ali1">Syed Sadaf Ali</a>, <strong>Afeefa Azam</strong>, <a href="https://openreview.net/profile?id=~Irfan_Hussain1">Irfan Hussain</a>, <a href="https://openreview.net/profile?id=~Yusra_Abdulrahman1">Yusra Abdulrahman</a></p>
+        </div>
+      </article>
 
       <article class="pub">
         <a class="pub-media" href="images/aerialyield-b2d.png"><img src="images/aerialyield-b2d.png" alt="AerialYield-B2D samples: smartphone close-ups and DJI drone frames of greenhouse blueberries" style="object-position: 0 15%" loading="lazy"></a>
@@ -396,6 +405,7 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
             <li>Vision for precision agriculture from aerial and greenhouse footage: crop monitoring, fruit counting, ripeness assessment, and yield estimation.</li>
             <li>Benchmark models on accuracy, robustness, and compute cost to guide model choice and a planned paper.</li>
             <li>Build a web dashboard and interactive app for crop analytics, ripeness, yield estimates, and model predictions.</li>
+            <li>Fly drones to collect aerial footage for crop monitoring and dataset building.</li>
           </ul>
         </div>
       </li>
@@ -433,9 +443,9 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
   <section class="section" id="projects">
     <div class="section-head"><h2>🛠️ Projects</h2></div>
     <div class="projects">
-      <article class="project"><a class="project-media" href="images/blueberry-benchmark.png"><img src="images/blueberry-benchmark.png" alt="Unified blueberry model diagram" style="object-position: 0 50%" loading="lazy"></a><div class="project-body"><h3>Aerial Yield</h3><p>Benchmarking deep models for fruit counting and ripeness, plus a dashboard for exploring predictions, crop analytics, and yield estimates.</p><div class="stack"><span class="tag tg-blue">PyTorch</span><span class="tag tg-green">YOLO</span><span class="tag tg-violet">FastAPI</span></div></div></article>
+      <article class="project"><a class="project-media" href="images/blueberry-benchmark.png"><img src="images/blueberry-benchmark.png" alt="Unified blueberry model diagram" style="object-position: 0 50%" loading="lazy"></a><div class="project-body"><h3>Aerial Yield</h3><p>Drone-based fruit counting and ripeness detection for blueberry and tomato crops. I fly the drones for the aerial data, benchmark deep models on it, and built a dashboard for exploring predictions, crop analytics, and yield estimates.</p><div class="stack"><span class="tag tg-blue">PyTorch</span><span class="tag tg-green">YOLO</span><span class="tag tg-violet">FastAPI</span></div></div></article>
       <article class="project"><a class="project-media" href="images/aircraft-defect.png"><img src="images/aircraft-defect.png" alt="YOLOv8 detection of a dent on an aircraft nose" style="object-position: 50% 45%" loading="lazy"></a><div class="project-body"><h3>Aircraft Defect Detection</h3><p>YOLOv8 pipeline for aircraft surface defects with preprocessing, augmentation, and evaluation. Undergraduate major project.</p><div class="stack"><span class="tag tg-green">YOLOv8</span><span class="tag tg-violet">FastAPI</span></div></div></article>
-      <article class="project"><a class="project-media" href="images/jet-blade.png"><img src="images/jet-blade.png" alt="BladeDelta: blade mesh with the detected damage point, and a 3D check of the point against the known target" style="object-fit: contain; background: #fff" loading="lazy"></a><div class="project-body"><h3>BladeDelta: Jet Engine Blade Inspection</h3><p>Locates dents on a blade's 3D mesh from multi-view photos and measures their depth. An evidence test reports damage only where the cameras can see it, and says "not supported" otherwise. On a sealed test (240 cases, 30 blades never used in development), it cut false alarms from 32% to 10%, abstained on 85% of hidden dents, and measured found dents to a median depth error of 0.03&nbsp;mm. Next: transferring it to six real blade CAD designs.</p><div class="stack"><span class="tag tg-cyan">OpenCV</span><span class="tag tg-blue">PyTorch</span><span class="tag tg-amber">3D</span></div></div></article>
+      <article class="project"><a class="project-media" href="images/jet-blade.png"><img src="images/jet-blade.png" alt="BladeDelta: blade mesh with the detected damage point, and a 3D check of the point against the known target" style="object-fit: contain; background: #fff" loading="lazy"></a><div class="project-body"><h3>BladeDelta: Jet Engine Blade Inspection</h3><p>A 3D damage pipeline for jet engine blades. It starts from a healthy CAD model and a few calibrated photos of a blade, reconstructs the damaged surface as a 3D mesh, and places each dent with an estimated depth. The core idea is the evidence test: a dent is reported only where the camera views support it, and otherwise the system returns "not supported." On a sealed test of 240 cases from 30 blades never used in development, the false alarm rate fell from 32% to 10%, the system abstained on 85% of hidden dents, and found dents were measured to a median depth error of 0.03&nbsp;mm. Next steps are a transfer test on six held-out blade CAD designs and validation on 3D-printed damaged blades.</p><div class="stack"><span class="tag tg-cyan">OpenCV</span><span class="tag tg-blue">PyTorch</span><span class="tag tg-amber">3D</span></div></div></article>
       <article class="project"><a class="project-media" href="images/greenvlm.jpg"><img src="images/greenvlm-thumb.jpg" alt="GreenVLM pipeline diagram" style="object-fit: contain; background: #fff" loading="lazy"></a><div class="project-body"><h3>GreenVLM</h3><p>CLIP-based tomato ripeness classification with limited labels, using domain adaptation across greenhouses.</p><div class="stack"><span class="tag tg-blue">CLIP</span><span class="tag tg-amber">Hugging Face</span></div></div></article>
       <article class="project"><div class="project-media"><img src="images/cervixguard.jpg" alt="Illustrative H&amp;E-stained cervical tissue section" title="Illustrative image: carcinoma in situ of the cervix, H&amp;E (public domain, Wikimedia Commons)" loading="lazy"></div><div class="project-body"><h3>CervixGuard</h3><p>An evidence-based review layer for cervical biopsy AI: each warning links to the exact tissue the model used, so uncertain or conflicting grades go to a human reviewer. More training slides lifted the grading baseline from 60.2% to 77.5% macro recall; the review guard is still being tested against confidence-based review.</p><div class="stack"><span class="tag tg-rose">Medical Imaging</span><span class="tag tg-violet">Explainability</span><span class="tag tg-cyan">Pathology</span></div></div></article>
       <article class="project"><div class="project-media tile th-berry">Course Syllabus Assistant</div><div class="project-body"><h3>Course Syllabus Assistant</h3><p>Chatbot that answers course questions and navigates the syllabus through a Gradio interface.</p><div class="stack"><span class="tag tg-green">ChatGPT</span><span class="tag tg-amber">Gradio</span></div></div></article>
@@ -475,6 +485,7 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
           <div><dt>Languages</dt><dd>Python, C/C++, SQL, Java, JavaScript, CSS, Bash</dd></div>
           <div><dt>Frameworks</dt><dd>PyTorch, PyTorch3D, TensorFlow, OpenCV, Hugging Face, YOLO, CLIP, DINOv2, Qwen2-VL, scikit-learn, NumPy, SciPy, Qiskit, PennyLane</dd></div>
           <div><dt>3D &amp; CAD</dt><dd>Blender (bpy), nvdiffrast, Trimesh, Open3D, MeshLab, FreeCAD, OpenCASCADE, Gmsh, STEP/STL meshes</dd></div>
+          <div><dt>Drones</dt><dd>Flying drones for aerial crop footage and field data collection</dd></div>
           <div><dt>Tools</dt><dd>FastAPI, Gradio, PyQt5/6, Git, GitHub Pages, Jupyter, Colab, Conda, CUDA, Linux (systemd), Matplotlib, Power BI, MATLAB, LaTeX</dd></div>
         </dl>
       </div>
