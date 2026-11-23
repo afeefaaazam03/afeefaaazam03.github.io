@@ -193,6 +193,10 @@ img { max-width: 100%; }
 .project-media { display: grid; place-items: center; aspect-ratio: 16 / 9; background: var(--soft); border-bottom: 1px solid var(--line); overflow: hidden; }
 .project-media img { width: 100%; height: 100%; object-fit: cover; }
 .project-media.tile { color: #fff; font: 800 22px/1.1 var(--f-display); text-align: center; padding: 16px; border-bottom: 0; }
+.project-media.th-berry { background: linear-gradient(140deg, #2e3277, #5b5fd0); }
+.project-media.th-leaf { background: linear-gradient(140deg, #14532d, #3f9d5e); }
+.project-media.th-aero { background: linear-gradient(140deg, #1e3a5f, #4b7fa8); }
+.project-media.th-rose { background: linear-gradient(140deg, #7f1d4f, #d0568f); }
 .project-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .project h3 { font-size: 17px; font-weight: 700; }
 .project p { margin: 0; font-size: 14.5px; color: var(--muted); }
@@ -260,6 +264,9 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
           <span class="tag tg-blue">3D Damage Localization</span>
           <span class="tag tg-violet">Shape Estimation</span>
           <span class="tag tg-cyan">Medical Imaging</span>
+          <span class="tag tg-green">Classroom Visual Understanding</span>
+          <span class="tag tg-amber">AI for Education</span>
+          <span class="tag tg-violet">Multimodal Foundation Models</span>
         </div>
       </div>
 
@@ -304,10 +311,10 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
       <article class="pub">
         <a class="pub-media" href="images/aerialyield-t2m.png"><img src="images/aerialyield-t2m.png" alt="AerialYield-T2M: six tomato ripeness classes with crops, masks, overlays and class shares" style="object-position: 10% 20%" loading="lazy"></a>
         <div class="pub-body">
-          <div class="pub-flags"><span class="venue v-prep">In preparation</span><span class="tag tg-amber">Datasets</span><span class="tag tg-rose">Ripeness</span></div>
-          <h3>AerialYield-T2M: A Dual-Modality Greenhouse Tomato Dataset with Six-Stage Ripeness Masks and Fruit Counts</h3>
-          <p class="authors"><strong>A. Azam</strong> et al.</p>
-          <p class="pub-desc">Greenhouse tomatoes annotated in six ripeness stages, from green to red, with per-class masks and fruit counts. Being prepared for Scientific Data.</p>
+          <div class="pub-flags"><span class="venue v-sub">Scientific Data · Submitted</span><span class="tag tg-amber">Datasets</span><span class="tag tg-rose">Ripeness</span><span class="tag tg-green">Robotics</span></div>
+          <h3>AerialYield-T2M: A Dual-Platform and Multilevel Tomato Ripeness Benchmark to Advance Robotic Perception and Precision Harvesting</h3>
+          <p class="authors"><strong>A. Azam</strong> (first author) et al.</p>
+          <p class="pub-desc">Greenhouse tomatoes annotated in six ripeness stages, from green to red, with per-class masks and fruit counts. Submitted to Scientific Data.</p>
         </div>
       </article>
 
@@ -336,6 +343,25 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
       </article>
 
       <article class="pub">
+        <a class="pub-media" href="images/blueberry-benchmark.png"><img src="images/blueberry-benchmark.png" alt="Unified blueberry model: shared encoder feeding counting, classification, detection and segmentation heads" style="object-fit: contain; background: #fff" loading="lazy"></a>
+        <div class="pub-body">
+          <div class="pub-flags"><span class="venue v-sub">Computers and Electronics in Agriculture · Submitted</span><span class="tag tg-cyan">Benchmark</span><span class="tag tg-violet">Multi-Task</span></div>
+          <h3>A Unified Benchmark for Blueberry Detection, Segmentation, Counting, and Ripeness Classification</h3>
+          <p class="authors">I. I. Ganapathi, <strong>A. Azam</strong>, M. Owais, I. Hussain, Y. Abdulrahman</p>
+          <p class="pub-desc">One benchmark that compares models across four blueberry tasks, with a shared-encoder model that serves all four heads.</p>
+        </div>
+      </article>
+
+      <article class="pub">
+        <div class="pub-media tile th-leaf"><b>Pre-Harvest Loss Survey</b><span>ACM Computing Surveys &middot; Submitted</span></div>
+        <div class="pub-body">
+          <div class="pub-flags"><span class="venue v-sub">ACM Computing Surveys · Submitted</span><span class="tag tg-cyan">Survey</span><span class="tag tg-green">Robotics</span></div>
+          <h3>AI-Driven Multi-Modal Robotic Vision and Decision Intelligence for Pre-Harvest Loss Reduction: A Survey</h3>
+          <p class="authors">Y. Mustafa (first author), <strong>A. Azam</strong> (coauthor)</p>
+        </div>
+      </article>
+
+      <article class="pub">
         <a class="pub-media" href="images/berryseg-ls.png"><img src="images/berryseg-ls.png" alt="BerrySegLS ablation montage comparing patch-crop, tiny-berry augmentation and input resolution" style="object-position: 20% 30%" loading="lazy"></a>
         <div class="pub-body">
           <div class="pub-flags"><span class="venue v-prep">In preparation</span><span class="tag tg-violet">Segmentation</span><span class="tag tg-amber">Counting</span></div>
@@ -344,17 +370,6 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
           <p class="pub-desc">High-resolution one-stage segmentation with a learned-seed watershed to split clustered blueberries and count them accurately.</p>
         </div>
       </article>
-
-      <article class="pub">
-        <a class="pub-media" href="images/blueberry-benchmark.png"><img src="images/blueberry-benchmark.png" alt="Unified blueberry model: shared encoder feeding counting, classification, detection and segmentation heads" style="object-fit: contain; background: #fff" loading="lazy"></a>
-        <div class="pub-body">
-          <div class="pub-flags"><span class="venue v-prep">In preparation</span><span class="tag tg-cyan">Benchmark</span><span class="tag tg-violet">Multi-Task</span></div>
-          <h3>A Unified Benchmark for Blueberry Detection, Segmentation, Counting, and Ripeness Classification</h3>
-          <p class="authors">I. I. Ganapathi, <strong>A. Azam</strong>, M. Owais, I. Hussain, Y. Abdulrahman</p>
-          <p class="pub-desc">One benchmark that compares models across four blueberry tasks, with a shared-encoder model that serves all four heads.</p>
-        </div>
-      </article>
-
 
       <article class="pub">
         <a class="pub-media" href="images/ripebench.png"><img src="images/ripebench.png" alt="RipeBench pipeline: robot detects tomato ripeness R1 to R4 and harvests R3 and R4 bunches" loading="lazy"></a>
@@ -417,7 +432,8 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
           <ul>
             <li>Advisor: Prof. Naoufel Werghi.</li>
             <li>AI-based flare combustion efficiency estimation; first-author paper accepted at ICMLDE 2025.</li>
-            <li>Built a user interface and ML models for classroom image understanding and monitoring.</li>
+            <li>Studied the team’s work on an industry- and application-focused classroom face recognition and monitoring prototype.</li>
+            <li>Built the graphical user interface (GUI) for the classroom vision system. The prototype supports student recognition at varying camera distances, classroom monitoring, and automated attendance statistics.</li>
           </ul>
         </div>
       </li>
@@ -443,9 +459,11 @@ footer { padding-block: 24px 40px; font-size: 13.5px; color: var(--muted); displ
   <section class="section" id="projects">
     <div class="section-head"><h2>🛠️ Projects</h2></div>
     <div class="projects">
-      <article class="project"><a class="project-media" href="images/blueberry-benchmark.png"><img src="images/blueberry-benchmark.png" alt="Unified blueberry model diagram" style="object-position: 0 50%" loading="lazy"></a><div class="project-body"><h3>Aerial Yield</h3><p>Drone-based fruit counting and ripeness detection for blueberry and tomato crops. I fly the drones for the aerial data, benchmark deep models on it, and built a dashboard for exploring predictions, crop analytics, and yield estimates.</p><div class="stack"><span class="tag tg-blue">PyTorch</span><span class="tag tg-green">YOLO</span><span class="tag tg-violet">FastAPI</span></div></div></article>
+      <article class="project"><a class="project-media" href="images/blueberry-benchmark.png"><img src="images/blueberry-benchmark.png" alt="Unified blueberry model diagram" style="object-position: 0 50%" loading="lazy"></a><div class="project-body"><h3>Aerial Yield</h3><p>Drone-based fruit counting and ripeness detection for blueberry and tomato crops. I fly the drones for the aerial data, benchmark deep models on it, and built a dashboard for exploring predictions, crop analytics, and yield estimates. A benchmarking paper is in progress, alongside the tomato and blueberry dataset work.</p><div class="stack"><span class="tag tg-blue">PyTorch</span><span class="tag tg-green">YOLO</span><span class="tag tg-violet">FastAPI</span></div></div></article>
       <article class="project"><a class="project-media" href="images/aircraft-defect.png"><img src="images/aircraft-defect.png" alt="YOLOv8 detection of a dent on an aircraft nose" style="object-position: 50% 45%" loading="lazy"></a><div class="project-body"><h3>Aircraft Defect Detection</h3><p>YOLOv8 pipeline for aircraft surface defects with preprocessing, augmentation, and evaluation. Undergraduate major project.</p><div class="stack"><span class="tag tg-green">YOLOv8</span><span class="tag tg-violet">FastAPI</span></div></div></article>
-      <article class="project"><a class="project-media" href="images/jet-blade.png"><img src="images/jet-blade.png" alt="BladeDelta: blade mesh with the detected damage point, and a 3D check of the point against the known target" style="object-fit: contain; background: #fff" loading="lazy"></a><div class="project-body"><h3>BladeDelta: Jet Engine Blade Inspection</h3><p>A 3D damage pipeline for jet engine blades. It starts from a healthy CAD model and a few calibrated photos of a blade, reconstructs the damaged surface as a 3D mesh, and places each dent with an estimated depth. The core idea is the evidence test: a dent is reported only where the camera views support it, and otherwise the system returns "not supported." On a sealed test of 240 cases from 30 blades never used in development, the false alarm rate fell from 32% to 10%, the system abstained on 85% of hidden dents, and found dents were measured to a median depth error of 0.03&nbsp;mm. Next steps are a transfer test on six held-out blade CAD designs and validation on 3D-printed damaged blades.</p><div class="stack"><span class="tag tg-cyan">OpenCV</span><span class="tag tg-blue">PyTorch</span><span class="tag tg-amber">3D</span></div></div></article>
+      <article class="project"><a class="project-media" href="images/jet-blade.png"><img src="images/jet-blade.png" alt="BladeDelta: blade mesh with the detected damage point, and a 3D check of the point against the known target" style="object-fit: contain; background: #fff" loading="lazy"></a><div class="project-body"><h3>BladeDelta: Jet Engine Blade Inspection</h3><p>A 3D damage pipeline for jet engine blades. It starts from a healthy CAD model and a few calibrated photos of a blade, reconstructs the damaged surface as a 3D mesh, and places each dent with an estimated depth. The core idea is the evidence test: a dent is reported only where the camera views support it, and otherwise the system returns "not supported." On a sealed test of 240 cases from 30 blades never used in development, the false alarm rate fell from 32% to 10%, the system abstained on 85% of hidden dents, and found dents were measured to a median depth error of 0.03&nbsp;mm. The synthetic benchmark has dev, calibration, and sealed test splits plus a transfer test on held-out blade CAD designs. Validation on 3D-printed damaged blades is planned.</p><div class="stack"><span class="tag tg-cyan">OpenCV</span><span class="tag tg-blue">PyTorch</span><span class="tag tg-amber">3D</span></div></div></article>
+      <article class="project"><div class="project-media tile th-aero">Classroom Vision</div><div class="project-body"><h3>Classroom Face Recognition and Monitoring</h3><p>An industry- and application-focused prototype from Prof. Naoufel Werghi’s group at Khalifa University. It supports student recognition at varying camera distances, classroom monitoring, and automated attendance statistics. I studied the team’s approach and built the graphical interface. It was a team project.</p><div class="stack"><span class="tag tg-blue">PyQt</span><span class="tag tg-cyan">Computer Vision</span></div></div></article>
+      <article class="project"><div class="project-media tile th-rose">ThermoFM</div><div class="project-body"><h3>ThermoFM: Active Infrared Thermography for Aerospace Maintenance</h3><p>A KU RIG-2026 research project led by Dr. Yusra Abdulrahman on physics-guided generative thermal data and foundation models for understanding defects in aerospace components. Planned work includes retrieval-augmented vision-language models that link thermal evidence to maintenance documentation, and a language-guided maintenance assistant.</p><div class="stack"><span class="tag tg-rose">Thermography</span><span class="tag tg-blue">Foundation Models</span><span class="tag tg-amber">Planned</span></div></div></article>
       <article class="project"><a class="project-media" href="images/greenvlm.jpg"><img src="images/greenvlm-thumb.jpg" alt="GreenVLM pipeline diagram" style="object-fit: contain; background: #fff" loading="lazy"></a><div class="project-body"><h3>GreenVLM</h3><p>CLIP-based tomato ripeness classification with limited labels, using domain adaptation across greenhouses.</p><div class="stack"><span class="tag tg-blue">CLIP</span><span class="tag tg-amber">Hugging Face</span></div></div></article>
       <article class="project"><div class="project-media"><img src="images/cervixguard.jpg" alt="Illustrative H&amp;E-stained cervical tissue section" title="Illustrative image: carcinoma in situ of the cervix, H&amp;E (public domain, Wikimedia Commons)" loading="lazy"></div><div class="project-body"><h3>CervixGuard</h3><p>An evidence-based review layer for cervical biopsy AI: each warning links to the exact tissue the model used, so uncertain or conflicting grades go to a human reviewer. More training slides lifted the grading baseline from 60.2% to 77.5% macro recall; the review guard is still being tested against confidence-based review.</p><div class="stack"><span class="tag tg-rose">Medical Imaging</span><span class="tag tg-violet">Explainability</span><span class="tag tg-cyan">Pathology</span></div></div></article>
       <article class="project"><div class="project-media tile th-berry">Course Syllabus Assistant</div><div class="project-body"><h3>Course Syllabus Assistant</h3><p>Chatbot that answers course questions and navigates the syllabus through a Gradio interface.</p><div class="stack"><span class="tag tg-green">ChatGPT</span><span class="tag tg-amber">Gradio</span></div></div></article>
